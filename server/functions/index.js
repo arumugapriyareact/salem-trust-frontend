@@ -13,7 +13,6 @@ app.use(cors());
 
 app.use("/.netlify/functions/api/payment",paymentRoutes)
 
-
 const port = process.env.PORT || 8000;
 app.listen(port,()=>{console.log(`Listening to port ${port}`)});
 module.exports.handler=serverless(app)
