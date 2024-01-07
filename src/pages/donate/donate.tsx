@@ -51,6 +51,7 @@ const DonateComponent = () => {
       console.log(data);
       initPayment(data.data);
     } catch (error) {
+      alert("The value can't be zero")
       console.log(error);
     }
   };
