@@ -15,7 +15,7 @@ const DonateComponent = () => {
       order_id: data.id,
       handler: async (response: any) => {
         try {
-          const verifyUrl = "http://localhost:8000/netlify/functions/api/payment/verify";
+          const verifyUrl = "https://main--merry-souffle-d73993.netlify.app/.netlify/functions/api/verify";
           const { data } = await axios.post(verifyUrl, response);
           console.log(data);
         } catch (error) {
@@ -34,7 +34,7 @@ const DonateComponent = () => {
 
   const handlePayment = async () => {
     try {
-      const orderUrl = "http://localhost:8000/netlify/functions/api/payment/orders";
+      const orderUrl = "https://main--merry-souffle-d73993.netlify.app/.netlify/functions/api/orders";
       const { data } = await axios.post(orderUrl, { amount:"1" });
       console.log(data);
       initPayment(data.data);
