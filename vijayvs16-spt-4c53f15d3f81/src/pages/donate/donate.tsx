@@ -11,7 +11,7 @@ const DonateComponent = () => {
     },
       amount: data.amount,
       currency: data.currency,
-      description: "Test Transaction",
+      description: "Test Transaction", 
       order_id: data.id,
       handler: async (response: any) => {
         alert("ya")
