@@ -1,7 +1,18 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import axios from "axios";
 import Razorpay from 'razorpay';
+
 const DonateComponent = () => {
+
+  const [details,setDetails]= useState({amount:0})
+
+  const handleDetails=(key: any,value: any)=>{
+    console.log(key,value)
+      setDetails({
+        ...details,
+        [key]:value
+      })
+  }
 
   const initPayment = (data: { amount: any; currency: any; id: any; }) => {
     const options = {
@@ -32,10 +43,11 @@ const DonateComponent = () => {
     rzp1.open();
   };
 
+
   const handlePayment = async () => {
     try {
       const orderUrl = "https://main--merry-souffle-d73993.netlify.app/.netlify/functions/api/orders";
-      const { data } = await axios.post(orderUrl, { amount:"1" });
+      const { data } = await axios.post(orderUrl, { amount:details.amount });
       console.log(data);
       initPayment(data.data);
     } catch (error) {
@@ -121,10 +133,10 @@ const DonateComponent = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label>Amount to Give</label>
-                        <input type="text" className="form-control" placeholder="Amount" />
+                        <input type="text" className="form-control" placeholder="Amount" onChange={(e)=>handleDetails("amount",e.target.value)} />
                       </div>
                     </div>
-                    <div className="col-md-12">
+                    {/* <div className="col-md-12">
                       <div className="form-group d-flex">
                         <div className="form-check d-flex">
                           <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
@@ -139,7 +151,7 @@ const DonateComponent = () => {
                           <label className="form-check-label" >Payoneer</label>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="col-md-12" onClick={()=>handlePayment()}>
                       <input type="submit" value="Donate Now" className="btn btn-primary py-3 px-4 rounded" />
                     </div>
