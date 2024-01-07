@@ -14,7 +14,6 @@ const DonateComponent = () => {
       description: "Test Transaction", 
       order_id: data.id,
       handler: async (response: any) => {
-        alert("ya")
         try {
           const verifyUrl = "http://localhost:8000/netlify/functions/api/payment/verify";
           const { data } = await axios.post(verifyUrl, response);
